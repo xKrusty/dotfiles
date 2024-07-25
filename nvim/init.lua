@@ -43,6 +43,6 @@ require("bufferline").setup()
 require("scrollbar").setup()
 
 require("lsp")
-require("telescope")
-require("treesitter")
+require("telescope-config")
+require("treesitter-config")
 require("dap-config")
