@@ -1,20 +1,30 @@
 return {
     { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-    "nvim-treesitter/playground",
-    "nvim-telescope/telescope.nvim",
     { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons", opt = true } },
     "akinsho/bufferline.nvim",
     { "windwp/nvim-autopairs", config = function() require("nvim-autopairs").setup {} end },
     "numToStr/Comment.nvim",
-    { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
     "petertriho/nvim-scrollbar",
+    "nvim-treesitter/playground",
 
+    -- lsp
     { "VonHeikemen/lsp-zero.nvim", branch = "v3.x" },
     "neovim/nvim-lspconfig",
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/nvim-cmp",
     "L3MON4D3/LuaSnip",
+    { "williamboman/mason-lspconfig.nvim", dependencies = { "williamboman/mason.nvim" } }, 
 
-    { "rose-pine/neovim", name = "rose-pine" }
+    -- dap
+    { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
+    { "jay-babu/mason-nvim-dap.nvim", dependencies = { "williamboman/mason.nvim"} },
+
+    -- themes
+    { "rose-pine/neovim", name = "rose-pine" },
+
+    -- telescope
+    { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
+    "nvim-telescope/telescope-fzf-native.nvim",
+
 }
 

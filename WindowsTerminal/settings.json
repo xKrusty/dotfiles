@@ -73,11 +73,11 @@
         },
         {
             "command": "unbound",
-            "keys": "ctrl+shift+w"
+            "keys": "ctrl+w"
         },
         {
             "command": "unbound",
-            "keys": "ctrl+w"
+            "keys": "ctrl+alt+w"
         },
         {
             "command": 
@@ -147,7 +147,7 @@
             {
                 "action": "closeTab"
             },
-            "keys": "ctrl+alt+w"
+            "keys": "ctrl+shift+w"
         },
         {
             "command": 
@@ -206,7 +206,8 @@
             "keys": "ctrl+9"
         },
         {
-            "command": "closePane"
+            "command": "closePane",
+            "keys": "alt+shift+w"
         }
     ],
     "copyFormatting": "none",

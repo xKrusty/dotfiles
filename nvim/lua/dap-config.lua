@@ -51,3 +51,9 @@ vim.keymap.set("n", "<F5>", "DapContinue<CR>")
 vim.keymap.set("n", "<F10>", ":DapStepOver<CR>")
 vim.keymap.set("n", "<F11>", ":DapStepInto<CR>")
 vim.keymap.set("n", "<F12>", ":DapStepOut<CR>")
+
+-- automatic installs
+require("mason").setup()
+require("mason-nvim-dap").setup({
+    ensure_installed = { "delve", "debugpy" }
+})
