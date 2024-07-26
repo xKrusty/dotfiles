@@ -21,7 +21,7 @@ vim.o.termguicolors = true
 vim.o.signcolumn = "yes"
 vim.o.cursorline = true
 
-vim.o.updatetime = 500 -- for cursorhold event
+vim.o.updatetime = 2000 -- for cursorhold event
 
 local map = vim.api.nvim_set_keymap
 local silent = { silent = true, noremap = true }
@@ -48,3 +48,6 @@ require("telescope-config")
 require("treesitter-config")
 require("dap-config")
 require("cmp-config")
+require("lualine-config")
+require("scrollbar-config")
+require("ufo-config")

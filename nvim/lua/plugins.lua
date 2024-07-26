@@ -1,11 +1,8 @@
 return {
     { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-    { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons", opt = true } },
-    "akinsho/bufferline.nvim",
+    "nvim-treesitter/playground",
     { "windwp/nvim-autopairs", config = function() require("nvim-autopairs").setup {} end },
     "numToStr/Comment.nvim",
-    "petertriho/nvim-scrollbar",
-    "nvim-treesitter/playground",
 
     -- lsp
     { "VonHeikemen/lsp-zero.nvim", branch = "v3.x" },
@@ -23,12 +20,18 @@ return {
     { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
     { "jay-babu/mason-nvim-dap.nvim", dependencies = { "williamboman/mason.nvim"} },
 
-    -- themes
+    -- looks / themes
     { "rose-pine/neovim", name = "rose-pine" },
+    { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons", opt = true } },
+    "akinsho/bufferline.nvim",
+    "petertriho/nvim-scrollbar",
+    "lewis6991/gitsigns.nvim",
+    "luukvbaal/statuscol.nvim",
+    { "kevinhwang91/nvim-ufo", dependencies = { "kevinhwang91/promise-async" } },
+    { "lukas-reineke/indent-blankline.nvim", main = "ibl" },
 
     -- telescope
     { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
     "nvim-telescope/telescope-fzf-native.nvim",
-
 }
 
