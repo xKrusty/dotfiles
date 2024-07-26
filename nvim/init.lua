@@ -23,16 +23,17 @@ vim.o.cursorline = true
 
 vim.o.updatetime = 500 -- for cursorhold event
 
-
-
 local map = vim.api.nvim_set_keymap
 local silent = { silent = true, noremap = true }
 map("", "<Space>", "<Nop>", silent)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- custom keymaps
 vim.keymap.set("n", "<C-m>", "<Cmd>bn<CR>", { silent = true })
 vim.keymap.set("n", "<C-n>", "<Cmd>bp<CR>", { silent = true })
+vim.keymap.set("n", "<leader>c", "<Cmd>noh<CR>", {silent = true })
+
 
 require("config.lazy")
 
@@ -42,7 +43,8 @@ require("lualine").setup()
 require("bufferline").setup()
 require("scrollbar").setup()
 
-require("lsp")
+require("lsp-config")
 require("telescope-config")
 require("treesitter-config")
 require("dap-config")
+require("cmp-config")

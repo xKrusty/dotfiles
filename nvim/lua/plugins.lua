@@ -10,10 +10,14 @@ return {
     -- lsp
     { "VonHeikemen/lsp-zero.nvim", branch = "v3.x" },
     "neovim/nvim-lspconfig",
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/nvim-cmp",
     "L3MON4D3/LuaSnip",
     { "williamboman/mason-lspconfig.nvim", dependencies = { "williamboman/mason.nvim" } }, 
+
+    -- cmp
+    "hrsh7th/nvim-cmp",
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-nvim-lsp-signature-help",
+    "onsails/lspkind.nvim",
 
     -- dap
     { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
