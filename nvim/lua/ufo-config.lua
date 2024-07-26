@@ -11,7 +11,9 @@ require("statuscol").setup({
 })
 
 require("ufo").setup({})
-require("ibl").setup()
+require("ibl").setup({
+    scope = { enabled = false }
+})
 
 vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 vim.o.foldcolumn = '1'

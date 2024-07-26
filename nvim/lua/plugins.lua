@@ -29,6 +29,7 @@ return {
     "luukvbaal/statuscol.nvim",
     { "kevinhwang91/nvim-ufo", dependencies = { "kevinhwang91/promise-async" } },
     { "lukas-reineke/indent-blankline.nvim", main = "ibl" },
+    "HiPhish/rainbow-delimiters.nvim",
 
     -- telescope
     { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
