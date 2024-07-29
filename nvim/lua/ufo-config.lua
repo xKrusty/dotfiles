@@ -8,6 +8,10 @@ require("statuscol").setup({
         { text = { " " } } -- padding to prevent folds-sign from overlapping into text
     }
 })
+-- set Debugging icons, colors found in :hi
+vim.fn.sign_define("DapBreakpoint", { text="", texthl="Error", linehl="", numhl="" })
+vim.fn.sign_define("DapBreakpointCondition", { text="", texthl="Error", linehl="", numhl="" })
+vim.fn.sign_define("DapStopped", { text="", texthl="Added", linehl="", numhl="" })
 
 require("ufo").setup({})
 require("ibl").setup({

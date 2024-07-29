@@ -30,6 +30,7 @@ return {
     { "kevinhwang91/nvim-ufo", dependencies = { "kevinhwang91/promise-async" } },
     { "lukas-reineke/indent-blankline.nvim", main = "ibl" },
     "HiPhish/rainbow-delimiters.nvim",
+    -- "folke/which-key.nvim" -- in case i ever forget my keybinds
 
     -- telescope
     { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },

@@ -80,6 +80,10 @@
             "keys": "ctrl+alt+w"
         },
         {
+            "command": "unbound",
+            "keys": "f11"
+        },
+        {
             "command": 
             {
                 "action": "switchToTab",
@@ -528,7 +532,6 @@
         }
     ],
     "showTabsInTitlebar": true,
-    "tabSwitcherMode": "mru",
     "theme": "rose-pine-moon",
     "themes": 
     [
