@@ -21,3 +21,13 @@ require("mason-lspconfig").setup({
         end,
     }
 })
+
+require("lspconfig").basedpyright.setup({
+    settings = {
+        basedpyright = {
+            analysis = {
+                typeCheckingMode = "basic",
+            }
+        }
+    }
+})

@@ -7,29 +7,6 @@
             "command": 
             {
                 "action": "switchToTab",
-                "index": 0
-            },
-            "keys": "ctrl+1"
-        },
-        {
-            "command": 
-            {
-                "action": "copy",
-                "singleLine": false
-            }
-        },
-        {
-            "command": 
-            {
-                "action": "switchToTab",
-                "index": 4
-            },
-            "keys": "ctrl+5"
-        },
-        {
-            "command": 
-            {
-                "action": "switchToTab",
                 "index": 7
             },
             "keys": "ctrl+8"
@@ -106,12 +83,35 @@
             "command": 
             {
                 "action": "switchToTab",
-                "index": 3
+                "index": 4
             },
-            "keys": "ctrl+4"
+            "keys": "ctrl+5"
+        },
+        {
+            "command": 
+            {
+                "action": "copy",
+                "singleLine": false
+            }
+        },
+        {
+            "command": 
+            {
+                "action": "switchToTab",
+                "index": 0
+            },
+            "keys": "ctrl+1"
         },
         {
             "command": "paste"
+        },
+        {
+            "command": 
+            {
+                "action": "switchToTab",
+                "index": 3
+            },
+            "keys": "ctrl+4"
         },
         {
             "command": "find",
@@ -145,17 +145,17 @@
         {
             "command": 
             {
-                "action": "moveFocus",
-                "direction": "right"
+                "action": "closeTab"
             },
-            "keys": "alt+l"
+            "keys": "ctrl+shift+w"
         },
         {
             "command": 
             {
-                "action": "closeTab"
+                "action": "moveFocus",
+                "direction": "right"
             },
-            "keys": "ctrl+shift+w"
+            "keys": "alt+l"
         },
         {
             "command": 
@@ -185,17 +185,17 @@
             "command": 
             {
                 "action": "switchToTab",
-                "index": 6
+                "index": 5
             },
-            "keys": "ctrl+7"
+            "keys": "ctrl+6"
         },
         {
             "command": 
             {
                 "action": "switchToTab",
-                "index": 5
+                "index": 6
             },
-            "keys": "ctrl+6"
+            "keys": "ctrl+7"
         },
         {
             "command": 
@@ -528,6 +528,7 @@
         }
     ],
     "showTabsInTitlebar": true,
+    "tabSwitcherMode": "mru",
     "theme": "rose-pine-moon",
     "themes": 
     [
