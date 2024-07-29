@@ -19,6 +19,7 @@ return {
     -- dap
     { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
     { "jay-babu/mason-nvim-dap.nvim", dependencies = { "williamboman/mason.nvim"} },
+    -- "theHamsta/nvim-dap-virtual-text",
 
     -- looks / themes
     { "rose-pine/neovim", name = "rose-pine" },
@@ -31,6 +32,7 @@ return {
     { "lukas-reineke/indent-blankline.nvim", main = "ibl" },
     "HiPhish/rainbow-delimiters.nvim",
     -- "folke/which-key.nvim" -- in case i ever forget my keybinds
+    "stevearc/dressing.nvim",
 
     -- telescope
     { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },

@@ -1,6 +1,5 @@
 local dap, dapui = require("dap"), require("dapui")
-
-dapui.setup()
+dap.set_log_level("DEBUG")
 
 -- adapters
 dap.adapters.python = function(cb, config)
@@ -69,6 +68,8 @@ dap.configurations.python = {
         request = "launch",
         name = "Launch File",
         program = "${file}",
+        console = "integratedTerminal", -- doesnt seem to use the dap Terminal, just outputs into nothing?
+        redirectOutput = true,
         pythonPath = function()
             local venv = vim.env.virtual_env
             if venv == nil then
@@ -82,6 +83,51 @@ dap.configurations.python = {
                 return "pythonw.exe"
             else
                 return "python"
+            end
+        end,
+    },
+    {
+        type = "python",
+        request = "launch",
+        name = "Launch File with Args",
+        program = "${file}",
+        pythonPath = function()
+            local venv = vim.env.virtual_env
+            if venv == nil then
+                venv = "venv"
+            end
+            if vim.fn.executable(venv .. "/Scripts/pythonw.exe") == 1 then -- windows
+                return venv .. "/Scripts/pythonw.exe"
+            elseif vim.fn.executable(venv .. "/bin/python.exe") == 1 then -- linux
+                return venv .. "/bin/python.exe"
+            elseif vim.fn.executable("pythonw.exe") == 1 then
+                return "pythonw.exe"
+            else
+                return "python"
+            end
+        end,
+        -- args = function()
+        --     local input = vim.fn.input("Arguments: ")
+        --     return vim.split(input, " ", { trimempty = true } )
+        -- end,
+        args = function()
+            local co = coroutine.running()
+            local cb = function(input)
+                coroutine.resume(co, input)
+            end
+            
+            cb = vim.schedule_wrap(cb)
+            if vim.ui then
+                vim.ui.input({prompt = "Arguments: " }, cb)
+
+                local input = coroutine.yield()
+                return vim.split(input, " ", { triempty = true } )
+            else
+                local input = vim.fn.input("Arguments: ")
+                return vim.split(input, " ", { trimempty = true } )
+            end
+
+            if co then
             end
         end,
     },
@@ -103,11 +149,13 @@ end
 -- keymap
 vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint)
 vim.keymap.set("n", "<leader>gb", dap.run_to_cursor)
+vim.keymap.set("n", "<leader>gc", dap.clear_breakpoints)
 vim.keymap.set("n", "<leader>B", ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", {buffer=0})
 
 vim.keymap.set("n", "<leader>i", function() dapui.eval(nil, { enter = true }) end) -- inspect value under cursor
 
 vim.keymap.set("n", "<F5>", dap.continue)
+vim.keymap.set("n", "<F6>", dap.pause)
 vim.keymap.set("n", "<F10>",dap.step_over)
 vim.keymap.set("n", "<F11>", dap.step_into)
 vim.keymap.set("n", "<F12>", dap.step_out)
@@ -124,3 +172,73 @@ require("mason-nvim-dap").setup({
     --     end,
     -- }
 })
+
+-- dap ui
+dapui.setup({
+    controls = {
+      element = "repl",
+      enabled = true,
+      icons = {
+        disconnect = "",
+        pause = "",
+        play = "",
+        run_last = "",
+        step_back = "",
+        step_into = "",
+        step_out = "",
+        step_over = "",
+        terminate = ""
+      }
+    },
+    element_mappings = {},
+    expand_lines = true,
+    floating = {
+      border = "single",
+      mappings = {
+        close = { "q", "<Esc>" }
+      }
+    },
+    force_buffers = true,
+    icons = {
+      collapsed = "",
+      current_frame = "",
+      expanded = ""
+    },
+    layouts = { {
+        elements = { {
+            id = "scopes",
+            size = 0.25
+          }, {
+            id = "breakpoints",
+            size = 0.25
+          }, {
+            id = "stacks",
+            size = 0.25
+          }, {
+            id = "watches",
+            size = 0.25
+          } },
+        position = "left",
+        size = 40
+      }, {
+        elements = { {
+            id = "repl",
+            size = 1
+          } },
+        position = "bottom",
+        size = 20
+      } },
+    mappings = {
+      edit = "e",
+      expand = { "<CR>", "<2-LeftMouse>" },
+      open = "o",
+      remove = "d",
+      repl = "r",
+      toggle = "t"
+    },
+    render = {
+      indent = 1,
+      max_value_lines = 100
+    }
+})
+--require("nvim-dap-virtual-text").setup()

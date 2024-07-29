@@ -9,9 +9,9 @@ require("statuscol").setup({
     }
 })
 -- set Debugging icons, colors found in :hi
-vim.fn.sign_define("DapBreakpoint", { text="", texthl="Error", linehl="", numhl="" })
-vim.fn.sign_define("DapBreakpointCondition", { text="", texthl="Error", linehl="", numhl="" })
-vim.fn.sign_define("DapStopped", { text="", texthl="Added", linehl="", numhl="" })
+vim.fn.sign_define("DapBreakpoint", { text="", texthl="DapUIStop", linehl="", numhl="" })
+vim.fn.sign_define("DapBreakpointCondition", { text="", texthl="DapUIStop", linehl="", numhl="" })
+vim.fn.sign_define("DapStopped", { text="", texthl="DapUIPlayPause", linehl="", numhl="" })
 
 require("ufo").setup({})
 require("ibl").setup({
