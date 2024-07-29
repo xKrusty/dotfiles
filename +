@@ -2,11 +2,12 @@ local builtin = require("statuscol.builtin")
 require("statuscol").setup({
     relculright = true, -- right-align the cursor line number with "relativenumber"
     segments = {
-        { sign = { name = { ".*" }, maxwidth = 1, auto = false }, click = "v:lua.ScSa" }, -- Breakpoint
+        { sign = { name = ".*" }, click = "v:lua.ScSa" }, -- Breakpoint
         { text = { builtin.lnumfunc }, click = "v:lua.ScSa" }, -- line number
         { text = { builtin.foldfunc }, click = "v:lua.ScFa" }, -- folds
-        { text = { " " } } -- padding to prevent folds-sign from overlapping into text
+        { sign = { name = "padding", colwidth = 1, fillchar = " "} } -- padding to prevent folds-sign from overlapping into text
     }
+    
 })
 
 require("ufo").setup({})

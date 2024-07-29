@@ -47,7 +47,7 @@ end
 vim.keymap.set("n", "<leader>b", ":DapToggleBreakpoint<CR>")
 vim.keymap.set("n", "<leader>B", ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", {buffer=0})
 
-vim.keymap.set("n", "<F5>", "DapContinue<CR>")
+vim.keymap.set("n", "<F5>", ":DapContinue<CR>")
 vim.keymap.set("n", "<F10>", ":DapStepOver<CR>")
 vim.keymap.set("n", "<F11>", ":DapStepInto<CR>")
 vim.keymap.set("n", "<F12>", ":DapStepOut<CR>")
