@@ -3,20 +3,20 @@ Import-Module -Name Terminal-Icons # Install-Module -Name Terminal-Icons -Reposi
 
 # PSReadLine
 Import-Module PSReadLine
-Set-PSReadLineOption -PredictionSource HistoryAndPlugin
+#Set-PSReadLineOption -PredictionSource History
 Set-PSReadLineOption -PredictionViewStyle ListView
 
 Set-PSReadLineKeyHandler -Key Ctrl+f -Function Complete
-Set-PSReadLineKeyHandler -Key Ctrl+h -Function BackwardChar
 Set-PSReadLineKeyHandler -Key Ctrl+j -Function NextHistory
 Set-PSReadLineKeyHandler -Key Ctrl+k -Function PreviousHistory
-Set-PSReadLineKeyHandler -Key Ctrl+l -Function ForwardChar
-Set-PSReadLineKeyHandler -Key Ctrl+Shift+l -Function ClearScreen
+#Set-PSReadLineKeyHandler -Key Ctrl+h -Function BackwardChar
+#Set-PSReadLineKeyHandler -Key Ctrl+l -Function ForwardChar
+#Set-PSReadLineKeyHandler -Key Ctrl+Shift+l -Function ClearScreen
 
 # Custom Functions
 function ls-list([string]$arg) # ls with list view
 {
-    Get-ChildItem $arg | Format-Wide
+    Get-ChildItem $arg | Format-Wide -AutoSize
 }
 Set-Alias -Name ls -Value ls-list
 
