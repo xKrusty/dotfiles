@@ -17,7 +17,7 @@ return {
     "onsails/lspkind.nvim",
 
     -- dap
-    { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
+    { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" }, command = "DapContinue" },
     { "jay-babu/mason-nvim-dap.nvim", dependencies = { "williamboman/mason.nvim"} },
     -- "theHamsta/nvim-dap-virtual-text",
 
@@ -37,5 +37,7 @@ return {
     -- telescope
     { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
     "nvim-telescope/telescope-fzf-native.nvim",
+
+    "dstein64/vim-startuptime",
 }
 

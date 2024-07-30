@@ -7,14 +7,13 @@ Set-PSReadLineOption -PredictionSource HistoryAndPlugin
 Set-PSReadLineOption -PredictionViewStyle ListView
 
 Set-PSReadLineKeyHandler -Key Ctrl+f -Function Complete
-
 Set-PSReadLineKeyHandler -Key Ctrl+h -Function BackwardChar
 Set-PSReadLineKeyHandler -Key Ctrl+j -Function NextHistory
 Set-PSReadLineKeyHandler -Key Ctrl+k -Function PreviousHistory
 Set-PSReadLineKeyHandler -Key Ctrl+l -Function ForwardChar
 Set-PSReadLineKeyHandler -Key Ctrl+Shift+l -Function ClearScreen
 
-# Custom Stuff
+# Custom Functions
 function ls-list([string]$arg) # ls with list view
 {
     Get-ChildItem $arg | Format-Wide
@@ -33,10 +32,4 @@ function prompt
     "$ESC[38;2;115;140;190m`u{e70f} $env:USERNAME ~ $($executionContext.SessionState.Path.CurrentLocation)`r`n$ESC[38;2;180;210;230m⮞ "
 
     # PSReadLine highlighting can change the prompt color :(
-}
-
-function test-prompt
-{
-    $ESC = [char]27
-    Write-Host "$ESC[38;2;0;0;0m$ESC[0m$ESC[48;2;0;0;0m Text $ESC[0m$ESC[38;2;0;0;0m$ESC[0m";
 }

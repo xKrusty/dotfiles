@@ -1,4 +1,3 @@
-
 vim.o.tabstop = 4       -- A tab character looks like 4 spaces
 vim.o.softtabstop = 4   -- number of spaces inserted instead of tab character
 vim.o.shiftwidth = 4    -- number of spaces inserted when indenting
@@ -13,7 +12,6 @@ vim.o.wrap = false
 vim.o.swapfile = false
 vim.o.backup = false
 
---vim.o.hlsearch = false
 vim.o.incsearch = true
 
 vim.o.termguicolors = true
@@ -34,21 +32,18 @@ vim.keymap.set("n", "<C-m>", "<Cmd>bn<CR>", { silent = true })
 vim.keymap.set("n", "<C-n>", "<Cmd>bp<CR>", { silent = true })
 vim.keymap.set("n", "<leader>c", "<Cmd>noh<CR>", {silent = true })
 
-
-require("config.lazy")
-
+-- load plugin configs
+require("lazy-config")
 require("rose-pine").setup()
 vim.cmd("colorscheme rose-pine-moon")
-require("lualine").setup()
-require("bufferline").setup()
-require("scrollbar").setup()
-
 require("lsp-config")
 require("telescope-config")
 require("treesitter-config")
 require("dap-config")
 require("cmp-config")
 require("lualine-config")
+require("bufferline-config")
 require("scrollbar-config")
 require("ufo-config")
 require("dressing-config")
+
