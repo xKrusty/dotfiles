@@ -32,4 +32,14 @@ cmp.setup({
             border = "rounded"
         }
     },
+    enabled = function() -- for dap-repl autocomplete
+        return vim.api.nvim_buf_get_option(0, "buftype") == "prompt"
+            or require("cmp_dap").is_dap_buffer()
+        end,
+})
+
+cmp.setup.filetype({ "dap-repl", "dapui-watches", "dapui_hover" }, { -- autocomplete for repl, is a bit bugged
+    sources = {
+        { name = "dap" },
+    },
 })

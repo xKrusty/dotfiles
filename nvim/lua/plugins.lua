@@ -15,6 +15,7 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-nvim-lsp-signature-help",
     "onsails/lspkind.nvim",
+    "rcarriga/cmp-dap", -- autocomplete for dap-repl
 
     -- dap
     { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" }, command = "DapContinue" },
