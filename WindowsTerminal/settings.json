@@ -238,7 +238,10 @@
             "font": 
             {
                 "face": "FiraCode Nerd Font",
-                "size": 10.0
+                "size": 10.0,
+                "features": {
+                    "calt": 0
+                }
             },
             "startingDirectory": "."
         },
