@@ -51,6 +51,11 @@ function d([string]$arg) # find dir through fzf
 
 function dd([string]$drive, [string] $dir) # find dir without fzf
 {
+    if ($dir -eq "")
+    {
+        Write-Host "Missing input: dd <drive> <dir>."
+    }
+
     $drive = match-drive($drive)
     $results_str = fd --type d . $drive --max-depth 4
     $results = $results_str.Split("\n")
