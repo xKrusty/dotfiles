@@ -46,22 +46,22 @@ function match-drive([string]$arg)
 function d([string]$arg) # find dir through fzf
 {
     $arg = match-drive($arg)
-    fd --type d . $arg | fzf -e | cd
+    fd --type d . $arg  | fzf -e | cd
 }
 
 function dd([string]$drive, [string] $dir) # find dir without fzf
 {
     $drive = match-drive($drive)
-    $results_str = fd --type d . $drive
+    $results_str = fd --type d . $drive --max-depth 4
     $results = $results_str.Split("\n")
     <#
     $results | ForEach-Object {
-        if ($_.Contains($dir, "InvariantCultureIgnoreCase"))
+        if (($_ + "\").Contains("\" + $dir + "\", "InvariantCultureIgnoreCase"))
         {
             cd $_
             return
         }
     }
     #>
-    $results | where {$_.Contains($dir, "InvariantCultureIgnoreCase")} | select -First 1 | cd
+    $results | where {($_+"\").Contains("\" + $dir + "\", "InvariantCultureIgnoreCase")} | select -First 1 | cd
 }
