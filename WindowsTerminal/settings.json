@@ -7,6 +7,29 @@
             "command": 
             {
                 "action": "switchToTab",
+                "index": 0
+            },
+            "keys": "ctrl+1"
+        },
+        {
+            "command": 
+            {
+                "action": "copy",
+                "singleLine": false
+            }
+        },
+        {
+            "command": 
+            {
+                "action": "switchToTab",
+                "index": 4
+            },
+            "keys": "ctrl+5"
+        },
+        {
+            "command": 
+            {
+                "action": "switchToTab",
                 "index": 7
             },
             "keys": "ctrl+8"
@@ -87,35 +110,12 @@
             "command": 
             {
                 "action": "switchToTab",
-                "index": 4
-            },
-            "keys": "ctrl+5"
-        },
-        {
-            "command": 
-            {
-                "action": "copy",
-                "singleLine": false
-            }
-        },
-        {
-            "command": 
-            {
-                "action": "switchToTab",
-                "index": 0
-            },
-            "keys": "ctrl+1"
-        },
-        {
-            "command": "paste"
-        },
-        {
-            "command": 
-            {
-                "action": "switchToTab",
                 "index": 3
             },
             "keys": "ctrl+4"
+        },
+        {
+            "command": "paste"
         },
         {
             "command": "find",
@@ -149,17 +149,17 @@
         {
             "command": 
             {
-                "action": "closeTab"
-            },
-            "keys": "ctrl+shift+w"
-        },
-        {
-            "command": 
-            {
                 "action": "moveFocus",
                 "direction": "right"
             },
             "keys": "alt+l"
+        },
+        {
+            "command": 
+            {
+                "action": "closeTab"
+            },
+            "keys": "ctrl+shift+w"
         },
         {
             "command": 
@@ -189,17 +189,17 @@
             "command": 
             {
                 "action": "switchToTab",
-                "index": 5
+                "index": 6
             },
-            "keys": "ctrl+6"
+            "keys": "ctrl+7"
         },
         {
             "command": 
             {
                 "action": "switchToTab",
-                "index": 6
+                "index": 5
             },
-            "keys": "ctrl+7"
+            "keys": "ctrl+6"
         },
         {
             "command": 
@@ -238,10 +238,11 @@
             "font": 
             {
                 "face": "FiraCode Nerd Font",
-                "size": 10.0,
-                "features": {
+                "features": 
+                {
                     "calt": 0
-                }
+                },
+                "size": 10.0
             },
             "startingDirectory": "."
         },
