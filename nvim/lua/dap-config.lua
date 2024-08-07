@@ -94,7 +94,7 @@ local function stop_debugpy_server()
     end
 end
 
--- use attach, to fix a error which stops the debugging process in Python (WARN: No event handler for ... event = "debugpyAttach"), also seems to be overall faster :)
+-- use attach, to fix an error which stops the debugging process in Python (WARN: No event handler for ... event = "debugpyAttach"), also seems to be overall faster :)
 dap.configurations.python = {
     {
         type = "python",
