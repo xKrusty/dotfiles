@@ -1,5 +1,4 @@
 local dap, dapui = require("dap"), require("dapui")
-dap.set_log_level("DEBUG")
 
 -- adapters
 dap.adapters.python = function(cb, config)
@@ -62,11 +61,46 @@ dap.configurations.cpp = {
     },
 }
 
+-- PYTHON CONFIGURATION
+local function get_python_interpreter()
+    local venv = vim.env.virtual_env
+    if venv == nil then
+        venv = "venv"
+    end
+    if vim.fn.executable(venv .. "/Scripts/pythonw.exe") == 1 then -- windows
+        return venv .. "/Scripts/pythonw.exe"
+    elseif vim.fn.executable(venv .. "/bin/python.exe") == 1 then -- linux
+        return venv .. "/bin/python.exe"
+    elseif vim.fn.executable("pythonw.exe") == 1 then
+        return "pythonw.exe"
+    else
+        return "python"
+    end
+end
+
+local debugpy_id = nil -- ID to keep track of debugpy server process
+local function start_debugpy_server(file)
+    local interpreter = get_python_interpreter()
+    local cmd = { interpreter, "-m", "debugpy", "--listen", "5678", "--wait-for-client", file }
+    debugpy_id = vim.fn.jobstart(cmd)
+    vim.print("Debugpy server started: " .. debugpy_id .. ", " .. file)
+end
+
+local function stop_debugpy_server()
+    if debugpy_id then
+        vim.fn.jobstop(debugpy_id)
+        debugpy_id = nil
+        vim.print("Debugpy server stopped")
+    end
+end
+
+-- use attach, to fix a error which stops the debugging process in Python (WARN: No event handler for ... event = "debugpyAttach"), also seems to be overall faster :)
 dap.configurations.python = {
     {
         type = "python",
-        request = "launch",
-        name = "Launch File",
+        request = "attach",
+        -- request = "launch",
+        name = "Attach File to Server",
         program = "${file}",
         console = "integratedTerminal", -- doesnt seem to use the dap Terminal, just outputs into nothing?
         redirectOutput = true,
@@ -85,27 +119,20 @@ dap.configurations.python = {
                 return "python"
             end
         end,
+        connect = {
+            port = "5678",
+        },
+        preLaunchTask = function()
+            start_debugpy_server(vim.fn.expand("%")) -- get current buffer file
+        end,
+        --postDebugTask = stop_debugpy_server, -- doenst work?, seems to be called right after preLaunchTask, before i event start debugging
     },
     {
         type = "python",
         request = "launch",
         name = "Launch File with Args",
         program = "${file}",
-        pythonPath = function()
-            local venv = vim.env.virtual_env
-            if venv == nil then
-                venv = "venv"
-            end
-            if vim.fn.executable(venv .. "/Scripts/pythonw.exe") == 1 then -- windows
-                return venv .. "/Scripts/pythonw.exe"
-            elseif vim.fn.executable(venv .. "/bin/python.exe") == 1 then -- linux
-                return venv .. "/bin/python.exe"
-            elseif vim.fn.executable("pythonw.exe") == 1 then
-                return "pythonw.exe"
-            else
-                return "python"
-            end
-        end,
+        pythonPath = get_python_interpreter,
         -- args = function()
         --     local input = vim.fn.input("Arguments: ")
         --     return vim.split(input, " ", { trimempty = true } )
@@ -132,6 +159,11 @@ dap.configurations.python = {
         end,
     },
 }
+
+-- register Event listener to stop Debugpy
+dap.listeners.after.event_terminated.stop_debugpy = stop_debugpy_server
+dap.listeners.after.event_exited.stop_debugpy = stop_debugpy_server
+
 
 -- dap ui
 dap.listeners.after.event_initialized["dapui_config"] = function()
@@ -160,7 +192,7 @@ vim.keymap.set("n", "<F7>", dap.restart)
 vim.keymap.set("n", "<F10>",dap.step_over)
 vim.keymap.set("n", "<F11>", dap.step_into)
 vim.keymap.set("n", "<F12>", dap.step_out)
-vim.keymap.set("n", "<S-F5>", dap.step_back)
+vim.keymap.set("n", "<S-F5>", ":lua require'dap'.disconnect({terminateDebuggee = true})<CR>")
 
 -- automatic installs
 require("mason").setup()

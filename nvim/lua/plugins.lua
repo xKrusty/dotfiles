@@ -39,6 +39,8 @@ return {
     { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
     "nvim-telescope/telescope-fzf-native.nvim",
 
+    -- misc
     "dstein64/vim-startuptime",
+    "ThePrimeagen/vim-be-good"
 }
 
