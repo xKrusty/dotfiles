@@ -22,7 +22,14 @@ require('lualine').setup {
   sections = {
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {'filename'},
+    lualine_c = {
+        {
+            'filename', 
+            color = { bg = "#534d78" }, 
+            use_mode_colors = true,
+            separator = { left = "", right = "" },
+        }
+    },
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},
     lualine_z = {'location'}
