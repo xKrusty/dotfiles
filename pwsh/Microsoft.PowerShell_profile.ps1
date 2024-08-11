@@ -20,11 +20,6 @@ function ls-list([string]$arg) # ls with list view
 }
 Set-Alias -Name ls -Value ls-list
 
-function reload # simple reload config command
-{
-    . $PROFILE
-}
-
 function prompt # custom prompt
 {
     $ESC = [char]27
@@ -69,4 +64,9 @@ function dd([string]$drive, [string] $dir) # find dir without fzf
     }
     #>
     $results | where {($_+"\").Contains("\" + $dir + "\", "InvariantCultureIgnoreCase")} | select -First 1 | cd
+}
+
+function which ($arg) 
+{
+    Get-Command $arg -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Path -ErrorAction SilentlyContinue
 }
