@@ -207,7 +207,7 @@ require("mason-nvim-dap").setup({
 })
 
 -- hide REPL buffer
-vim.api.nvim_create_autocmd("FileType" {
+vim.api.nvim_create_autocmd("FileType", {
     pattern = "dap-repl",
     callback = function(args)
         vim.api.nvim_buf_set_option(args.buf, "buflisted", false)
