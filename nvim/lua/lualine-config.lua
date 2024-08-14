@@ -37,7 +37,14 @@ require('lualine').setup {
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {'filename'},
+    lualine_c = {
+        {
+            'filename',
+            color = { bg = "#2f2c45" },
+            user_mode_colors = false,
+            separator = { left = "", right = "" },
+        }
+    },
     lualine_x = {'location'},
     lualine_y = {},
     lualine_z = {}
