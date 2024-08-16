@@ -1,32 +1,53 @@
 local dap, dapui = require("dap"), require("dapui")
 
--- adapters
-dap.adapters.python = function(cb, config)
-    if config.request == "attach" then
-      ---@diagnostic disable-next-line: undefined-field
-      local port = (config.connect or config).port
-      ---@diagnostic disable-next-line: undefined-field
-      local host = (config.connect or config).host or "127.0.0.1"
-      cb({
-        type = "server",
-        port = assert(port, "`connect.port` is required for a python `attach` configuration"),
-        host = host,
-        options = {
-          source_filetype = "python",
-        },
-      })
-    else
-      cb({
-        type = "executable",
-        command = "C:\\Program Files\\Python311\\pythonw.exe",
-        args = { "-m", "debugpy.adapter" },
-        options = {
-          source_filetype = "python",
-        },
-      })
-    end
-  end
 
+-- ================
+-- go configuration
+-- ================
+--
+
+
+dap.adapters.go = function(cb, config)
+    local port = (config.connect or config).port
+    local host = (config.connect or config).host or "127.0.0.1"
+
+    cb({
+        type = "server", 
+        port = assert(port, "`connect.port` is required for go"),
+        host = host,
+        executable = {
+            command = "dlv",
+            args = { "dap", "-l", host .. ":" .. port },
+            detached = false,
+            cwd = vim.fn.getcwd(),
+        },
+        option = {
+            initialize_timeout_sec = 10,
+        },
+    })
+end
+
+dap.configurations.go = {
+    {
+        name = "Debug",
+        type = "go",
+        request = "launch",
+        program = "${file}",
+        -- program = function()
+        --     root = vim.fn.getcwd():match("([^/\\]+)$")
+        --     return root
+        -- end,
+        connect = {
+            port = "5678",
+        },
+        justMyCode = false,
+    }
+}
+
+
+-- ===================
+-- C/C++ Configuration
+-- ===================
 dap.adapters.cpptools = {
     type = "executable",
     command = vim.fn.stdpath('data') .. '/mason/bin/OpenDebugAD7.cmd',
@@ -36,7 +57,6 @@ dap.adapters.cpptools = {
     }
 }
 
--- configurations
 dap.configurations.c = {
     {
         name = "Launch",
@@ -61,7 +81,33 @@ dap.configurations.cpp = {
     },
 }
 
--- PYTHON CONFIGURATION
+-- ====================
+-- Python Configuration
+-- ====================
+dap.adapters.python = function(cb, config)
+    if config.request == "attach" then
+        local port = (config.connect or config).port
+        local host = (config.connect or config).host or "127.0.0.1"
+        cb({
+            type = "server",
+            port = assert(port, "`connect.port` is required for a python `attach` configuration"),
+            host = host,
+            options = {
+                source_filetype = "python",
+            },
+        })
+    else
+        cb({
+            type = "executable",
+            command = "C:\\Program Files\\Python311\\pythonw.exe",
+            args = { "-m", "debugpy.adapter" },
+            options = {
+                source_filetype = "python",
+            },
+        })
+    end
+end
+
 local function get_python_interpreter()
     local venv = vim.env.virtual_env
     if venv == nil then
@@ -104,21 +150,7 @@ dap.configurations.python = {
         program = "${file}",
         console = "integratedTerminal", -- doesnt seem to use the dap Terminal, just outputs into nothing?
         redirectOutput = true,
-        pythonPath = function()
-            local venv = vim.env.virtual_env
-            if venv == nil then
-                venv = "venv"
-            end
-            if vim.fn.executable(venv .. "/Scripts/pythonw.exe") == 1 then -- windows
-                return venv .. "/Scripts/pythonw.exe"
-            elseif vim.fn.executable(venv .. "/bin/python.exe") == 1 then -- linux
-                return venv .. "/bin/python.exe"
-            elseif vim.fn.executable("pythonw.exe") == 1 then
-                return "pythonw.exe"
-            else
-                return "python"
-            end
-        end,
+        pythonPath = get_python_interpreter,
         connect = {
             port = "5678",
         },
@@ -165,7 +197,9 @@ dap.listeners.after.event_terminated.stop_debugpy = stop_debugpy_server
 dap.listeners.after.event_exited.stop_debugpy = stop_debugpy_server
 
 
--- dap ui
+-- ====================
+-- dap ui configuration
+-- ====================
 dap.listeners.after.event_initialized["dapui_config"] = function()
     dapui.open()
 end
@@ -193,26 +227,6 @@ vim.keymap.set("n", "<F10>",dap.step_over)
 vim.keymap.set("n", "<F11>", dap.step_into)
 vim.keymap.set("n", "<F12>", dap.step_out)
 vim.keymap.set("n", "<S-F5>", ":lua require'dap'.disconnect({terminateDebuggee = true})<CR>")
-
--- automatic installs
-require("mason").setup()
-require("mason-nvim-dap").setup({
-    ensure_installed = { "delve", "debugpy", "cpptools" },
-    automatic_installation = false,
-    -- handlers = {
-    --     function(config)
-    --         require("mason-nvim-dap").default_setup(config)
-    --     end,
-    -- }
-})
-
--- hide REPL buffer
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "dap-repl",
-    callback = function(args)
-        vim.api.nvim_buf_set_option(args.buf, "buflisted", false)
-    end,
-})
 
 -- dap ui
 dapui.setup({
@@ -282,4 +296,29 @@ dapui.setup({
       max_value_lines = 100
     }
 })
+
+-- ========================
+-- Additional configuration
+-- ========================
+
 --require("nvim-dap-virtual-text").setup()
+
+-- -- automatic installs
+-- require("mason").setup()
+-- require("mason-nvim-dap").setup({
+--     ensure_installed = { "delve", "debugpy", "cpptools" },
+--     automatic_installation = false,
+--     -- handlers = {
+--     --     function(config)
+--     --         require("mason-nvim-dap").default_setup(config)
+--     --     end,
+--     -- }
+-- })
+
+-- hide REPL buffer
+-- vim.api.nvim_create_autocmd("FileType", {
+--     pattern = "dap-repl",
+--     callback = function(args)
+--         vim.api.nvim_buf_set_option(args.buf, "buflisted", false)
+--     end,
+-- })
