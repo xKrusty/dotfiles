@@ -2,11 +2,37 @@ local dap, dapui = require("dap"), require("dapui")
 
 
 -- ================
+-- odin configuration
+-- ================
+dap.adapters.lldb = {
+    type = "executable",
+    command = "lldb-vscode",
+    name = "lldb"
+}
+
+dap.configurations.odin = {
+    {
+        name = "Debug",
+        type = "lldb",
+        request = "launch",
+        program = vim.fn.getcwd():match("([^/\\]+)$") .. ".exe",
+        cwd = "${workspaceFolder}",
+        preLaunchTask = function()
+            local handle = io.popen("odin build . -debug")
+            local result = handle:read("a")
+            handle:close()
+
+            if string.find(result, "Error") then -- exit when compilation failed
+                dap.terminate()
+            end
+        end
+    }
+}
+
+
+-- ================
 -- go configuration
 -- ================
---
-
-
 dap.adapters.go = function(cb, config)
     local port = (config.connect or config).port
     local host = (config.connect or config).host or "127.0.0.1"
