@@ -22,7 +22,7 @@ end)
 -- automatic installs
 require("mason").setup({})
 require("mason-lspconfig").setup({
-    ensure_installed = { "clangd", "texlab", "basedpyright", "gopls" },
+    ensure_installed = { "clangd", "texlab", "basedpyright", "gopls", "ols" },
     handlers = {
         function(server_name)
             require("lspconfig")[server_name].setup({})
@@ -37,5 +37,13 @@ require("lspconfig").basedpyright.setup({
                 typeCheckingMode = "basic",
             }
         }
+    }
+})
+
+require("lspconfig").ols.setup({
+    settings = {
+        enable_hover = true,
+        enable_snippets = true,
+        enable_references = true,
     }
 })

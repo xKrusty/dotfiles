@@ -4,6 +4,7 @@ return {
     { "windwp/nvim-autopairs", config = function() require("nvim-autopairs").setup {} end },
     "numToStr/Comment.nvim",
     { "kylechui/nvim-surround", config = function() require("nvim-surround").setup({}) end},
+    "nvim-treesitter/nvim-treesitter-context",
 
     -- lsp
     { "VonHeikemen/lsp-zero.nvim", branch = "v3.x" },
@@ -42,6 +43,5 @@ return {
 
     -- misc
     "dstein64/vim-startuptime",
-    "ThePrimeagen/vim-be-good"
+    "ThePrimeagen/vim-be-good",
 }
-
