@@ -38,8 +38,6 @@ vim.api.nvim_create_user_command('Bc', function() vim.cmd("b#|bd#") end, { nargs
 
 -- load plugin configs
 require("lazy-config")
-require("rose-pine").setup()
-vim.cmd("colorscheme rose-pine-moon")
 require("lsp-config")
 require("telescope-config")
 require("treesitter-config")
@@ -50,4 +48,7 @@ require("bufferline-config")
 require("scrollbar-config")
 require("ufo-config")
 require("dressing-config")
+require("snipe-config")
 
+require("rose-pine").setup()
+vim.cmd("colorscheme rose-pine-moon")

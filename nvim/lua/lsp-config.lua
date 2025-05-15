@@ -6,12 +6,12 @@ lsp.on_attach(function(client, bufnr)
 
     local opts= {buffer = bufnr, remap = false }
     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-    vim.keymap.set("n", "<leader>vrr", function() 
+    vim.keymap.set("n", "<leader>vrr", function()
                                             local success, telescope = pcall(require, "telescope.builtin")
                                             if success then
                                                 telescope.lsp_references()
                                             else
-                                                vim.lsp.buf.references() 
+                                                vim.lsp.buf.references()
                                             end
                                         end, opts)
     vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
@@ -21,14 +21,14 @@ end)
 
 -- automatic installs
 require("mason").setup({})
-require("mason-lspconfig").setup({
-    ensure_installed = { "clangd", "texlab", "basedpyright", "gopls", "ols" },
-    handlers = {
-        function(server_name)
-            require("lspconfig")[server_name].setup({})
-        end,
-    }
-})
+-- require("mason-lspconfig").setup({
+--     ensure_installed = { "texlab", "basedpyright", "gopls", "ols", "biome" },
+--     handlers = {
+--         function(server_name)
+--             require("lspconfig")[server_name].setup({})
+--         end,
+--     }
+-- })
 
 require("lspconfig").basedpyright.setup({
     settings = {
@@ -47,3 +47,24 @@ require("lspconfig").ols.setup({
         enable_references = true,
     }
 })
+
+require("lspconfig").biome.setup({
+    on_attach = function(client)
+        client.server_capabilities.documentFormattingProvider = false
+    end,
+})
+
+
+require("lspconfig").zls.setup({
+    settings = {
+        zls = {
+            enable_build_on_save = false,
+        },
+        enable_build_on_save = false,
+    }
+})
+vim.g.zig_fmt_autosave=0
+
+require'lspconfig'.gdscript.setup{
+
+}
