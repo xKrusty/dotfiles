@@ -1,4 +1,13 @@
 require("snipe").setup({
+    ui = {
+        position = "center",
+
+        open_win_override = {
+            border = "rounded",
+        },
+
+        preselect_current = true,
+    },
     hints = {
         dictionary = "1234567890asdfg",
     }
