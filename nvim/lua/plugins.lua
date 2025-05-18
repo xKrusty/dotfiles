@@ -16,9 +16,9 @@ return {
     -- cmp
     "hrsh7th/nvim-cmp",
     "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-nvim-lsp-signature-help",
     "onsails/lspkind.nvim",
     "rcarriga/cmp-dap", -- autocomplete for dap-repl
+    "0n3W4y7ick3t/cmp-nvim-lsp-signature-help", -- fork, has proper highlighting
 
     -- dap
     { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" }, command = "DapContinue" },
@@ -34,7 +34,7 @@ return {
     { "kevinhwang91/nvim-ufo", dependencies = { "kevinhwang91/promise-async" } },
     { "lukas-reineke/indent-blankline.nvim", main = "ibl" },
     "HiPhish/rainbow-delimiters.nvim",
-    "stevearc/dressing.nvim",
+    -- "stevearc/dressing.nvim",
     "lewis6991/gitsigns.nvim",
 
     -- telescope

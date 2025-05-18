@@ -35,6 +35,9 @@ vim.keymap.set("n", "<leader>c", "<Cmd>noh<CR>", {silent = true })
 -- custom commands
 vim.api.nvim_create_user_command('Bc', function() vim.cmd("b#|bd#") end, { nargs = 0 }) -- close current buffer and swap to previous buffer (this keeps windows/tabs open)
 
+-- border on windows
+vim.o.winborder = "rounded"
+
 
 -- load plugin configs
 require("lazy-config")
@@ -47,7 +50,6 @@ require("lualine-config")
 require("bufferline-config")
 require("scrollbar-config")
 require("ufo-config")
-require("dressing-config")
 require("snipe-config")
 
 require("rose-pine").setup()

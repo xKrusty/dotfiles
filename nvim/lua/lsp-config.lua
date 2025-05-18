@@ -1,5 +1,6 @@
-
+local lspconfig = require("lspconfig")
 local lsp = require("lsp-zero")
+
 lsp.on_attach(function(client, bufnr)
     lsp.default_keymaps({buffer = bufnr})
     lsp.preset("recommended")
@@ -15,22 +16,24 @@ lsp.on_attach(function(client, bufnr)
                                             end
                                         end, opts)
     vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
-    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+    vim.keymap.set("n", "<leader>la", function() vim.lsp.buf.code_action() end, opts)
+
     vim.keymap.set("n", "<C-h>", function() vim.lsp.buf.hover() end, opts)
+
 end)
 
 -- automatic installs
 require("mason").setup({})
--- require("mason-lspconfig").setup({
---     ensure_installed = { "texlab", "basedpyright", "gopls", "ols", "biome" },
---     handlers = {
---         function(server_name)
---             require("lspconfig")[server_name].setup({})
---         end,
---     }
--- })
+require("mason-lspconfig").setup({
+    ensure_installed = { "texlab", "basedpyright", "ols", "biome" },
+    handlers = {
+        function(server_name)
+            require("lspconfig")[server_name].setup({})
+        end,
+    }
+})
 
-require("lspconfig").basedpyright.setup({
+lspconfig.basedpyright.setup({
     settings = {
         basedpyright = {
             analysis = {
@@ -40,7 +43,7 @@ require("lspconfig").basedpyright.setup({
     }
 })
 
-require("lspconfig").ols.setup({
+lspconfig.ols.setup({
     settings = {
         enable_hover = true,
         enable_snippets = true,
@@ -48,14 +51,14 @@ require("lspconfig").ols.setup({
     }
 })
 
-require("lspconfig").biome.setup({
+lspconfig.biome.setup({
     on_attach = function(client)
         client.server_capabilities.documentFormattingProvider = false
     end,
 })
 
 
-require("lspconfig").zls.setup({
+lspconfig.zls.setup({
     settings = {
         zls = {
             enable_build_on_save = false,
@@ -65,6 +68,17 @@ require("lspconfig").zls.setup({
 })
 vim.g.zig_fmt_autosave=0
 
-require'lspconfig'.gdscript.setup{
+lspconfig.gdscript.setup{
 
 }
+
+lspconfig.gopls.setup({
+    on_attach = function(client, bufnr)
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            callback = function()
+                vim.lsp.buf.format({ async = false })
+            end,
+        })
+    end,
+})
