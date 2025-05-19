@@ -19,7 +19,6 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "<leader>la", function() vim.lsp.buf.code_action() end, opts)
 
     vim.keymap.set("n", "<C-h>", function() vim.lsp.buf.hover() end, opts)
-
 end)
 
 -- automatic installs

@@ -21,6 +21,10 @@ vim.o.cursorline = true
 
 vim.o.updatetime = 2000 -- for cursorhold event
 
+vim.o.scrolloff = 2
+vim.o.winborder = "rounded"
+vim.diagnostic.config({ virtual_text = true })
+
 local map = vim.api.nvim_set_keymap
 local silent = { silent = true, noremap = true }
 map("", "<Space>", "<Nop>", silent)
@@ -35,22 +39,30 @@ vim.keymap.set("n", "<leader>c", "<Cmd>noh<CR>", {silent = true })
 -- custom commands
 vim.api.nvim_create_user_command('Bc', function() vim.cmd("b#|bd#") end, { nargs = 0 }) -- close current buffer and swap to previous buffer (this keeps windows/tabs open)
 
--- border on windows
-vim.o.winborder = "rounded"
 
 
 -- load plugin configs
 require("lazy-config")
-require("lsp-config")
-require("telescope-config")
-require("treesitter-config")
-require("dap-config")
-require("cmp-config")
-require("lualine-config")
-require("bufferline-config")
-require("scrollbar-config")
-require("ufo-config")
-require("snipe-config")
+-- require("lsp-config")
+-- require("telescope-config")
+-- require("treesitter-config")
+-- require("dap-config")
+-- require("cmp-config")
+-- require("lualine-config")
+-- require("bufferline-config")
+-- require("scrollbar-config")
+-- require("ufo-config")
+-- require("snipe-config")
+local s = ""
+for _, f in ipairs(vim.fn.globpath(vim.fn.stdpath("config").."/lua", "*-config.lua", true, true)) do
+    if not f:match("lazy%-config%.lua$") then
+        f = vim.fn.fnamemodify(f, ":t:r")
+        require(f)
+        s = s .. "," .. f
+    end
+
+end
+-- vim.api.nvim_echo({{s, "WarningMsg"}}, true, {})
 
 require("rose-pine").setup()
 vim.cmd("colorscheme rose-pine-moon")
