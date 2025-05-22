@@ -54,7 +54,7 @@ return {
     -- "theHamsta/nvim-dap-virtual-text",
 
     -- looks / themes
-    { "rose-pine/neovim", name = "rose-pine" },
+    { "rose-pine/neovim", name = "rose-pine", opts = true },
     { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons", opt = true } },
     "akinsho/bufferline.nvim",
     "petertriho/nvim-scrollbar",
@@ -64,6 +64,7 @@ return {
     "lewis6991/gitsigns.nvim",
     { "OXY2DEV/helpview.nvim", config = function() require("helpview").setup({ preview = { icon_provider = "devicons" } }) end },
     "nvim-treesitter/nvim-treesitter-context", -- show current function/struct (and such) youre in
+    -- "andersevenrud/nvim_context_vt" -- show virtual-text on closing brackets, to see which Obj it belongs to
 
     -- telescope
     { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
@@ -74,4 +75,5 @@ return {
     -- "dstein64/vim-startuptime",
     -- "ThePrimeagen/vim-be-good",
     -- "folke/which-key.nvim" -- in case i ever forget my keybinds
+    -- { "m4xshen/hardtime.nvim", dependencies = { "MunifTanjim/nui.nvim" }, opts = {} }
 }

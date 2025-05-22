@@ -13,13 +13,6 @@ Set-PSReadLineKeyHandler -Key Ctrl+k -Function PreviousHistory
 #Set-PSReadLineKeyHandler -Key Ctrl+l -Function ForwardChar
 #Set-PSReadLineKeyHandler -Key Ctrl+Shift+l -Function ClearScreen
 
-# Custom Functions
-function ls-list([string]$arg) # ls with list view
-{
-    Get-ChildItem $arg | Format-Wide -AutoSize
-}
-Set-Alias -Name ls -Value ls-list
-
 function prompt # custom prompt
 {
     $ESC = [char]27
@@ -28,27 +21,45 @@ function prompt # custom prompt
     # PSReadLine highlighting can change the prompt color :(
 }
 
-function match-drive([string]$arg)
+### CUSTOM FUNCTIONS ###
+
+function ls-list([string]$arg) # ls with list view
 {
-    # match Drive letter
-    if (($arg.Length -eq 1) -and ($arg -match "[a-zA-Z]") )
+    Get-ChildItem $arg | Format-Wide -AutoSize
+}
+Set-Alias -Name ls -Value ls-list
+
+
+# dive: dve <drive>
+# fuzzy find in a drive, requires fzf
+# automatically cd into selected result
+function dve([string]$drive)
+{
+    if ($drive -eq "")
     {
-        $arg = $arg + ":\"
+        Write-Host "Missing input: dve <drive>."
+        return
     }
-    return $arg
+
+    $drive = match-drive($drive)
+    if ($drive -eq "")
+    {
+        Write-Host "Invalid Drive, provide drive letter without ':'"
+        return
+    }
+
+    fd --type d . $drive  | fzf -e | cd
 }
 
-function d([string]$arg) # find dir through fzf
-{
-    $arg = match-drive($arg)
-    fd --type d . $arg  | fzf -e | cd
-}
-
-function dd([string]$drive, [string] $dir) # find dir without fzf
+# dive: ddve <drive> <folder>
+# tries to find the entered folder and cd into it
+# TODO: occasionally finds and selects the wrong directory/sub-dir
+function ddve([string]$drive, [string] $dir)
 {
     if ($dir -eq "")
     {
-        Write-Host "Missing input: dd <drive> <dir>."
+        Write-Host "Missing input: ddve <drive> <dir>."
+        return
     }
 
     $drive = match-drive($drive)
@@ -66,7 +77,22 @@ function dd([string]$drive, [string] $dir) # find dir without fzf
     $results | where {($_+"\").Contains("\" + $dir + "\", "InvariantCultureIgnoreCase")} | select -First 1 | cd
 }
 
+# Replacement for 'where', since that cant find 90% of binaries
 function which ($arg) 
 {
     Get-Command $arg -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Path -ErrorAction SilentlyContinue
 }
+
+### UTIL FUNCTIONS ###
+
+function match-drive([string]$arg)
+{
+    # match Drive letter
+    if (($arg.Length -eq 1) -and ($arg -match "[a-zA-Z]") )
+    {
+        $arg = $arg + ":\"
+        return $arg
+    }
+    return ""
+}
+

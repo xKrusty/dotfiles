@@ -64,5 +64,4 @@ for _, f in ipairs(vim.fn.globpath(vim.fn.stdpath("config").."/lua", "*-config.l
 end
 -- vim.api.nvim_echo({{s, "WarningMsg"}}, true, {})
 
-require("rose-pine").setup()
 vim.cmd("colorscheme rose-pine-moon")
