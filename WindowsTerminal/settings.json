@@ -7,9 +7,9 @@
             "command": 
             {
                 "action": "switchToTab",
-                "index": 1
+                "index": 0
             },
-            "id": "User.switchToTab.2A0DA8E0"
+            "id": "User.switchToTab.D3F0B923"
         },
         {
             "command": 
@@ -23,9 +23,9 @@
             "command": 
             {
                 "action": "switchToTab",
-                "index": 0
+                "index": 1
             },
-            "id": "User.switchToTab.D3F0B923"
+            "id": "User.switchToTab.2A0DA8E0"
         },
         {
             "command": 
@@ -39,17 +39,17 @@
             "command": 
             {
                 "action": "switchToTab",
-                "index": 7
+                "index": 4
             },
-            "id": "User.switchToTab.D7681B66"
+            "id": "User.switchToTab.F747588A"
         },
         {
             "command": 
             {
                 "action": "switchToTab",
-                "index": 4
+                "index": 7
             },
-            "id": "User.switchToTab.F747588A"
+            "id": "User.switchToTab.D7681B66"
         },
         {
             "command": 
@@ -66,18 +66,18 @@
         {
             "command": 
             {
-                "action": "resizePane",
-                "direction": "left"
-            },
-            "id": "User.resizePane.2A0DA8E0"
-        },
-        {
-            "command": 
-            {
                 "action": "moveFocus",
                 "direction": "down"
             },
             "id": "User.moveFocus.F747588A"
+        },
+        {
+            "command": 
+            {
+                "action": "resizePane",
+                "direction": "left"
+            },
+            "id": "User.resizePane.2A0DA8E0"
         },
         {
             "command": 
@@ -98,18 +98,18 @@
         {
             "command": 
             {
-                "action": "moveFocus",
-                "direction": "left"
-            },
-            "id": "User.moveFocus.2A0DA8E0"
-        },
-        {
-            "command": 
-            {
                 "action": "resizePane",
                 "direction": "down"
             },
             "id": "User.resizePane.F747588A"
+        },
+        {
+            "command": 
+            {
+                "action": "moveFocus",
+                "direction": "left"
+            },
+            "id": "User.moveFocus.2A0DA8E0"
         },
         {
             "command": 
@@ -130,17 +130,17 @@
             "command": 
             {
                 "action": "switchToTab",
-                "index": 2
+                "index": 5
             },
-            "id": "User.switchToTab.87C324ED"
+            "id": "User.switchToTab.75247157"
         },
         {
             "command": 
             {
                 "action": "switchToTab",
-                "index": 5
+                "index": 2
             },
-            "id": "User.switchToTab.75247157"
+            "id": "User.switchToTab.87C324ED"
         },
         {
             "command": 
@@ -165,17 +165,17 @@
         {
             "command": 
             {
-                "action": "scrollUp"
-            },
-            "id": "User.scrollUp.0"
-        },
-        {
-            "command": 
-            {
                 "action": "resizePane",
                 "direction": "right"
             },
             "id": "User.resizePane.87C324ED"
+        },
+        {
+            "command": 
+            {
+                "action": "scrollUp"
+            },
+            "id": "User.scrollUp.0"
         }
     ],
     "confirmCloseAllTabs": false,
@@ -188,20 +188,20 @@
     "keybindings": 
     [
         {
-            "id": null,
-            "keys": "ctrl+alt+9"
-        },
-        {
-            "id": null,
-            "keys": "ctrl+alt+2"
+            "id": "User.switchToTab.D3F0B923",
+            "keys": "ctrl+1"
         },
         {
             "id": "User.switchToTab.F747588A",
             "keys": "ctrl+5"
         },
         {
-            "id": "User.switchToTab.D3F0B923",
-            "keys": "ctrl+1"
+            "id": null,
+            "keys": "ctrl+alt+2"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+alt+9"
         },
         {
             "id": null,
@@ -213,11 +213,11 @@
         },
         {
             "id": null,
-            "keys": "ctrl+alt+w"
+            "keys": "alt+up"
         },
         {
             "id": null,
-            "keys": "alt+up"
+            "keys": "ctrl+alt+w"
         },
         {
             "id": null,

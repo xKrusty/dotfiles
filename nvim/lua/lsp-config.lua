@@ -23,14 +23,14 @@ end)
 
 -- automatic installs
 require("mason").setup({})
-require("mason-lspconfig").setup({
-    ensure_installed = { "texlab", "basedpyright", "ols", "biome" },
-    handlers = {
-        function(server_name)
-            require("lspconfig")[server_name].setup({})
-        end,
-    }
-})
+-- require("mason-lspconfig").setup({
+--     ensure_installed = { "texlab", "basedpyright", "ols", "biome" },
+--     handlers = {
+--         function(server_name)
+--             -- require("lspconfig")[server_name].setup({})
+--         end,
+--     }
+-- })
 
 lspconfig.basedpyright.setup({
     settings = {
@@ -81,3 +81,12 @@ lspconfig.gopls.setup({
         })
     end,
 })
+
+-- lua =require("mason-lspconfig").get_available_servers()
+lspconfig.cssls.setup({})
+lspconfig.html.setup({})
+lspconfig.lua_ls.setup({})
+lspconfig.omnisharp.setup({})
+lspconfig.texlab.setup({})
+lspconfig.denols.setup({})
+
