@@ -82,6 +82,7 @@ lspconfig.gopls.setup({
     end,
 })
 
+-- vim.lsp.log.set_level 'debug'
 -- lua =require("mason-lspconfig").get_available_servers()
 lspconfig.cssls.setup({})
 lspconfig.html.setup({})
@@ -89,4 +90,5 @@ lspconfig.lua_ls.setup({})
 lspconfig.omnisharp.setup({})
 lspconfig.texlab.setup({})
 lspconfig.denols.setup({})
-
+lspconfig.asm_lsp.setup({})
+-- lspconfig.clangd.setup({})   -- why no working :(
